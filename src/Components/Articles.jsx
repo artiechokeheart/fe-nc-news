@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
 import { fetchAllArticles } from "../utils";
+import { ArticleCard } from "./ArticleCard";
 
 export const Articles = () => {
-  const [currentArticles, setArticles] = useState([]);
-
-  const addArticles = () => {
-    setArticles((currentArticles) => {
-      return [...currentArticles];
-    });
-  };
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetchAllArticles().then((articles) => {
-      addArticles();
+    fetchAllArticles().then((articlesFromApi) => {
+      setArticles(articlesFromApi);
     });
   }, []);
 
   return (
-    <ol>
-      {currentArticles.map((article) => (
-        <li key={article.article_id}>{article.article_title}</li>
+    <ul className="columns-1">
+      {articles.map((article) => (
+        <ArticleCard
+          key={article.article_id}
+          id={article.artilce_id}
+          article={article}
+        />
       ))}
-    </ol>
+    </ul>
   );
 };

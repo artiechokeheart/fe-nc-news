@@ -1,7 +1,25 @@
+@import "tailwindcss";
+
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
-  border: whitesmoke 1px solid;
 }
+
+/* .home_page_articles > li {
+  width: 50rem;
+  height: 15rem;
+  border: hotpink 1px solid;
+}
+
+.home_page_articles > li > h3 {
+  border: hotpink 1px solid;
+  align-items: start;
+  text-align: left;
+}
+
+.home_page_articles > li > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  border: 1px solid black;
+  width: 50%; */
