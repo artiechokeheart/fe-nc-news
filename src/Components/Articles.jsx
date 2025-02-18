@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchAllArticles } from "../utils";
 import { ArticleCard } from "./ArticleCard";
+import { useParams } from "react-router-dom";
 
-export const Articles = () => {
-  const [articles, setArticles] = useState([]);
-
+export const Articles = ({ articles, setArticles }) => {
+  // const { articles, setArticles } = useParams;
   useEffect(() => {
     fetchAllArticles().then((articlesFromApi) => {
       setArticles(articlesFromApi);
