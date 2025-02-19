@@ -4,7 +4,7 @@ import { Comments } from "../Components/Comments";
 import { ArticleVoting } from "../Components/ArticleVoting";
 import { fetchArticleComments, fetchArticlesByArticleId } from "../utils/api";
 
-export const ArticlePage = ({ articles, setArticles }) => {
+export const ArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [comments, setComments] = useState([]);

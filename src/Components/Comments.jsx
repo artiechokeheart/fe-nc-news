@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 export const Comments = ({ comments }) => {
   const articleComments = comments.map((comment) => {
     return (

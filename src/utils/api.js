@@ -8,7 +8,6 @@ export const fetchAllArticles = (article_id) => {
   return newsApi
     .get("/articles/", { params: { article_id } })
     .then(({ data }) => {
-      console.log(data);
       return data;
     })
     .catch((error) => {

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchArticleVotes, patchArticle } from "../utils/api";
 
-export const ArticleVoting = ({ article }) => {
+export const ArticleVoting = () => {
   const { article_id } = useParams();
   const [currentVotes, setVotes] = useState(0);
   const [error, setError] = useState(null);
