@@ -8,11 +8,10 @@ export const fetchAllArticles = (article_id) => {
   return newsApi
     .get("/articles/", { params: { article_id } })
     .then(({ data }) => {
-      console.log(data);
       return data;
     })
     .catch((error) => {
-      // handle error
+      return error;
     });
 };
 
@@ -20,6 +19,23 @@ export const fetchArticlesByArticleId = (article_id) => {
   return newsApi.get(`/articles/${article_id}`).then(({ data }) => {
     return data;
   });
+};
+
+export const fetchArticleVotes = (article_id) => {
+  return newsApi.get(`/articles/${article_id}`).then(({ data }) => {
+    return data.votes;
+  });
+};
+
+export const patchArticle = (article_id, votes) => {
+  return newsApi
+    .patch(`/articles/${article_id}`, { inc_votes: votes })
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((error) => {
+      return error;
+    });
 };
 
 export const fetchArticleComments = (article_id) => {
