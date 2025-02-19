@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 export const ArticleCard = ({ article }) => {
   return (
     <li key={article.article_id}>
-      <h3 className="top-0 left-0 font-extrabold text-lg"> {article.title}</h3>{" "}
+      <h3 className="top-0 left-0 font-extrabold text-lg">
+        <Link to={"/articles/" + article.article_id}>{article.title}</Link>
+      </h3>
       <br />
       <img
         className="h-48 w-96 aspect-square object-contain"

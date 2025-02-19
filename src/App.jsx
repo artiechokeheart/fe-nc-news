@@ -3,15 +3,14 @@ import "./App.css";
 import { Header } from "./Components/Header";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage } from "./Pages/HomePage";
+import { ArticleContainer } from "./Containers/ArticleContainer";
 
 function App() {
+  console.log("in App,jsx");
   return (
     <>
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-      </Routes>
+      <ArticleContainer />
     </>
   );
 }

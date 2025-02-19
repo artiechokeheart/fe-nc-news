@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Articles } from "../Components/Articles";
 
-export const HomePage = () => {
+export const HomePage = ({ articles, setArticles }) => {
   return (
     <>
-      <Articles />
+      <Articles articles={articles} setArticles={setArticles} />
     </>
   );
 };
