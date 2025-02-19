@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchArticlesByArticleId, fetchArticleComments } from "../utils/index";
 import { Comments } from "../Components/Comments";
+import { ArticleVoting } from "../Components/ArticleVoting";
+import { fetchArticleComments, fetchArticlesByArticleId } from "../utils/api";
 
 export const ArticlePage = ({ articles, setArticles }) => {
   const { article_id } = useParams();
@@ -25,19 +26,15 @@ export const ArticlePage = ({ articles, setArticles }) => {
           src={article.article_img_url}
         />
         <div className=""> Topic: {article.topic}</div>
-        <div>Votes: {article.votes}</div>
+        <div>
+          <ArticleVoting article={article} />
+        </div>
         <div>Comments: {article.comment_count}</div>
         <br />
       </div>
       <div>
         <h3 className="text-lg">Comments</h3>
-        <ul
-          className="comments"
-          key={comments.comment_id}
-          id={comments.comment_id}
-        >
-          <Comments comments={comments} />
-        </ul>
+        <Comments comments={comments} />
       </div>
     </article>
   );
