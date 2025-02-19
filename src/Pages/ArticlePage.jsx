@@ -20,19 +20,20 @@ export const ArticlePage = ({ articles, setArticles }) => {
   return (
     <article>
       <h2 className="text-lg font-bold m-3">{article.title}</h2>
-      <div className=" m-4">
+      <div className="inline m-4">
         <img
-          className="aspect-ratio: auto object-contain"
+          className="float-start size-75 md:w-100 m-4"
           src={article.article_img_url}
         />
-        <div className=""> Topic: {article.topic}</div>
-        <div>
-          <ArticleVoting article={article} />
-        </div>
-        <div>Comments: {article.comment_count}</div>
-        <br />
+        <p className="">{article.body}</p>
       </div>
-      <div>
+      <div className="float-center">
+        Topic: {article.topic}
+        <ArticleVoting article={article} />
+      </div>
+      <br />
+      <div className="inline-grid">
+        <br />
         <h3 className="text-lg">Comments</h3>
         <Comments comments={comments} />
       </div>
