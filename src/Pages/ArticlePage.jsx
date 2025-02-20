@@ -3,18 +3,14 @@ import { useParams } from "react-router-dom";
 import { Comments } from "../Components/Comments";
 import { ArticleVoting } from "../Components/ArticleVoting";
 import { fetchArticleComments, fetchArticlesByArticleId } from "../utils/api";
-import { AddComment } from "../Components/AddComment";
 
 export const ArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
-  const [comments, setComments] = useState([]);
+
   useEffect(() => {
     fetchArticlesByArticleId(article_id).then((articleData) => {
       setArticle(articleData);
-    });
-    fetchArticleComments(article_id).then((commentData) => {
-      setComments(commentData);
     });
   }, [article_id]);
 
@@ -31,13 +27,12 @@ export const ArticlePage = () => {
       <div className="float-center">
         Topic: {article.topic}
         <ArticleVoting article={article} />
-        <AddComment />
       </div>
       <br />
       <div className="inline-grid">
         <br />
         <h3 className="text-lg">Comments</h3>
-        <Comments comments={comments} />
+        <Comments article_id={article_id} />
       </div>
     </article>
   );

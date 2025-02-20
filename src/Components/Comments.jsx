@@ -1,6 +1,39 @@
-export const Comments = ({ comments }) => {
+import { fetchArticleComments, postArticleComments } from "../utils/api";
+import { useState, useEffect } from "react";
+
+export const Comments = ({ article_id }) => {
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  const username = "jessjelly";
+
+  useEffect(() => {
+    fetchArticleComments(article_id)
+      .then((commentData) => {
+        setComments(commentData);
+      })
+      .catch((error) => {
+        console.log(error, "comments component");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [newComment]);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  const postComment = (formData, comments, setComments) => {
+    setIsLoading(true);
+    const query = formData.get("comment_box");
+    postArticleComments(article_id, query, username).then((postedComment) => {
+      setNewComment(postedComment);
+    });
+  };
+
   const articleComments = comments.map((comment) => {
-    console.log(comment);
     return (
       <li key={comment.comment_id}>
         <p className="leading-5">{comment.body}</p>
@@ -13,5 +46,18 @@ export const Comments = ({ comments }) => {
       </li>
     );
   });
-  return <ul>{articleComments}</ul>;
+  return (
+    <ul>
+      {articleComments}
+      <form className="" action={postComment}>
+        <textarea
+          className="bg-zinc-500 p-10"
+          name="comment_box"
+          placeholder="Comment here...."
+          type="text"
+        />
+        <button>Post</button>
+      </form>
+    </ul>
+  );
 };

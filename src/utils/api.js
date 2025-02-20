@@ -11,20 +11,30 @@ export const fetchAllArticles = (article_id) => {
       return data;
     })
     .catch((error) => {
-      return error;
+      console.log(error, "fetchAllArticles");
     });
 };
 
 export const fetchArticlesByArticleId = (article_id) => {
-  return newsApi.get(`/articles/${article_id}`).then(({ data }) => {
-    return data;
-  });
+  return newsApi
+    .get(`/articles/${article_id}`)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((error) => {
+      console.log(error, "fetchArticlesByArticleID");
+    });
 };
 
 export const fetchArticleVotes = (article_id) => {
-  return newsApi.get(`/articles/${article_id}`).then(({ data }) => {
-    return data.votes;
-  });
+  return newsApi
+    .get(`/articles/${article_id}`)
+    .then(({ data }) => {
+      return data.votes;
+    })
+    .catch((error) => {
+      console.log(error, "fetchArticleVotes");
+    });
 };
 
 export const patchArticle = (article_id, votes) => {
@@ -34,24 +44,29 @@ export const patchArticle = (article_id, votes) => {
       return data;
     })
     .catch((error) => {
-      return error;
+      console.log(error, "patchArticle");
     });
 };
 
 export const fetchArticleComments = (article_id) => {
-  return newsApi.get(`/articles/${article_id}/comments`).then(({ data }) => {
-    return data;
-  });
-};
-
-export const postArticleComments = (article_id, newComment) => {
   return newsApi
-    .post(`/articles/${article_id}/comments`, newComment)
+    .get(`/articles/${article_id}/comments`)
     .then(({ data }) => {
       return data;
     })
     .catch((error) => {
-      console.log(error);
-      return error;
+      console.log(error, "fetchArticleComments");
+    });
+};
+
+export const postArticleComments = (article_id, newComment, username) => {
+  const commentToPost = { username: username, body: newComment };
+  return newsApi
+    .post(`/articles/${article_id}/comments`, commentToPost)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((error) => {
+      console.log(error, "postArticleComments");
     });
 };
