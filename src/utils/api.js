@@ -4,9 +4,9 @@ const newsApi = axios.create({
   baseURL: "https://artemis-be-news.onrender.com/api",
 });
 
-export const fetchAllArticles = (article_id) => {
+export const fetchAllArticles = (topic) => {
   return newsApi
-    .get("/articles/", { params: { article_id } })
+    .get("/articles/", { params: { topic } })
     .then(({ data }) => {
       return data;
     })
@@ -68,5 +68,17 @@ export const postArticleComments = (article_id, newComment, username) => {
     })
     .catch((error) => {
       console.log(error, "postArticleComments");
+    });
+};
+
+export const fetchAllTopics = () => {
+  return newsApi
+    .get("/topics/")
+    .then(({ data }) => {
+      console.log(data);
+      return data;
+    })
+    .catch((error) => {
+      console.log(error, "fetchAllTopics");
     });
 };
