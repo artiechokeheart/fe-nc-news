@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Comments } from "../Components/Comments";
 import { ArticleVoting } from "../Components/ArticleVoting";
 import { fetchArticleComments, fetchArticlesByArticleId } from "../utils/api";
+import { AddComment } from "../Components/AddComment";
 
 export const ArticlePage = () => {
   const { article_id } = useParams();
@@ -30,6 +31,7 @@ export const ArticlePage = () => {
       <div className="float-center">
         Topic: {article.topic}
         <ArticleVoting article={article} />
+        <AddComment />
       </div>
       <br />
       <div className="inline-grid">
