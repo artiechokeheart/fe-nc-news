@@ -17,9 +17,6 @@ const Navbar = () => {
       <Link to="/" className="m-2">
         Home
       </Link>
-      <Link to="/topics" className="m-2">
-        Topics
-      </Link>
     </nav>
   );
 };
