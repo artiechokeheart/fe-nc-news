@@ -39,7 +39,11 @@ export const Comments = ({ article_id }) => {
 
   const DeleteComment = ({ comment }) => {
     const deleteOnClick = () => {
-      DeleteArticleComments(comment.comment_id).then((confirmation) => {});
+      setIsLoading(true);
+      DeleteArticleComments(comment.comment_id).then((confirmation) => {
+        setIsLoading(false);
+        setNewComment();
+      });
     };
 
     if (comment.author === username) {
