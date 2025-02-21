@@ -13,8 +13,10 @@ export const Header = () => {
 
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-center">
-      <Link to="/">Home</Link>
+    <nav className="flex items-center justify-center m-2 p-4">
+      <Link to="/" className="m-2">
+        Home
+      </Link>
     </nav>
   );
 };
