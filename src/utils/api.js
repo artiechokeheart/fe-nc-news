@@ -4,9 +4,9 @@ const newsApi = axios.create({
   baseURL: "https://artemis-be-news.onrender.com/api",
 });
 
-export const fetchAllArticles = (topic) => {
+export const fetchAllArticles = (topic, sort_by, order) => {
   return newsApi
-    .get("/articles/", { params: { topic } })
+    .get("/articles/", { params: { topic, sort_by, order } })
     .then(({ data }) => {
       return data;
     })
