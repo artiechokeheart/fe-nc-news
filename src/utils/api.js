@@ -71,11 +71,22 @@ export const postArticleComments = (article_id, newComment, username) => {
     });
 };
 
+export const DeleteArticleComments = (comment_id) => {
+  console.log(comment_id);
+  return newsApi
+    .delete(`/comments/${comment_id}`)
+    .then((response) => {
+      console.log(response, `Deleted post with ID ${comment_id}`);
+    })
+    .catch((error) => {
+      console.log(error, `Could not delete post with ID ${comment_id}`);
+    });
+};
+
 export const fetchAllTopics = () => {
   return newsApi
     .get("/topics/")
     .then(({ data }) => {
-      console.log(data);
       return data;
     })
     .catch((error) => {

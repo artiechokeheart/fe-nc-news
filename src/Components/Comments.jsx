@@ -1,4 +1,8 @@
-import { fetchArticleComments, postArticleComments } from "../utils/api";
+import {
+  DeleteArticleComments,
+  fetchArticleComments,
+  postArticleComments,
+} from "../utils/api";
 import { useState, useEffect } from "react";
 
 export const Comments = ({ article_id }) => {
@@ -33,6 +37,26 @@ export const Comments = ({ article_id }) => {
     });
   };
 
+  const DeleteComment = ({ comment }) => {
+    const deleteOnClick = () => {
+      setIsLoading(true);
+      DeleteArticleComments(comment.comment_id).then((confirmation) => {
+        setIsLoading(false);
+        setNewComment();
+      });
+    };
+
+    if (comment.author === username) {
+      return (
+        <button
+          className="bg-transparent hover:bg-zinc-600 text-zinc-200 font-semibold hover:text-white py-1 px-4 border border-zinc-500 hover:border-transparent rounded m-3"
+          onClick={deleteOnClick}
+        >
+          delete
+        </button>
+      );
+    }
+  };
   const articleComments = comments.map((comment) => {
     return (
       <li key={comment.comment_id}>
@@ -40,6 +64,7 @@ export const Comments = ({ article_id }) => {
         <button className="bg-transparent hover:bg-zinc-600 text-zinc-200 font-semibold hover:text-white py-1 px-4 border border-zinc-500 hover:border-transparent rounded m-3">
           {comment.votes} votes
         </button>
+        <DeleteComment comment={comment} />
         {comment.author}
 
         <hr />
