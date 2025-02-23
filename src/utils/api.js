@@ -5,9 +5,12 @@ const newsApi = axios.create({
 });
 
 export const fetchAllArticles = (topic, sort_by, order) => {
+  console.log(topic, sort_by, order, "<< fetchAllArticles ");
+
   return newsApi
-    .get("/articles/", { params: { topic, sort_by, order } })
+    .get("/articles", { params: { topic, sort_by, order } })
     .then(({ data }) => {
+      console.log(data);
       return data;
     })
     .catch((error) => {
