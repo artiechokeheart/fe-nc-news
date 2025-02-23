@@ -6,30 +6,42 @@ import { TopicsDropDown } from "./TopicsDropDown";
 import { HandleFilter } from "../utils/handleFilter";
 import { OrderToggle } from "./OrderToggle";
 
-export const SortArticlesDropDown = ({ articles, setArticles }) => {
+export const SortArticlesDropDown = ({ setArticles, setSearchParams }) => {
+  const handleChange = ({}) => {
+    const sortDropDown = document.querySelector("#sort");
+    const orderToggle = "desc" || order;
+    const topicDropDown = document.querySelector("#topics");
+    const sortValue = sortDropDown.value;
+    const orderValue = orderToggle;
+    const topicValue = topicDropDown.value;
+
+    HandleFilter({
+      topicValue,
+      sortValue,
+      orderValue,
+      setArticles,
+      setSearchParams,
+    });
+  };
+
   return (
     <>
       <label className="p-2">Sort_by:</label>
       <select name="sort" id="sort" onChange={handleChange}>
-        <option>date</option>
-        <option>comments</option>
+        <option>created_at</option>
+        <option>comment_count</option>
         <option>votes</option>
       </select>
-      <OrderToggle
-        articles={articles}
-        setArticles={setArticles}
-        setSearchParams={setSearchParams}
-      />
     </>
   );
 };
 
-export const handleChange = (e, { articles, setArticles, setSearchParams }) => {
-  const sortDropDown = document.querySelector("#sort");
-  const topicDropDown = document.querySelector("#topics");
-  const sortValue = sortDropDown.value;
-  const topicValue = topicDropDown.value;
-  const orderValue = e.target.value;
+// export const handleChange = (e, { articles, setArticles, setSearchParams }) => {
+//   const sortDropDown = document.querySelector("#sort");
+//   const topicDropDown = document.querySelector("#topics");
+//   const sortValue = sortDropDown.value;
+//   const topicValue = topicDropDown.value;
+//   const orderValue = e.target.value;
 
-  HandleFilter(topicValue, sortValue, orderValue, setArticles, setSearchParams);
-};
+//   HandleFilter(topicValue, sortValue, orderValue, setArticles, setSearchParams);
+// };

@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import { HomePage } from "../Pages/HomePage";
 import { ArticlePage } from "../Pages/ArticlePage";
 import { useState } from "react";
+import { useEffect } from "react";
+import { fetchAllArticles } from "../utils/api";
 
 export const ArticleContainer = () => {
   const [articles, setArticles] = useState([]);

@@ -9,6 +9,7 @@ export const TopicsDropDown = ({
   topics,
   setTopics,
   setSearchParams,
+  setNewFilter,
 }) => {
   useEffect(() => {
     fetchAllTopics().then((TopicsFromApi) => {
@@ -17,17 +18,17 @@ export const TopicsDropDown = ({
   }, []);
 
   const handleChange = ({}) => {
-    // const sortDropDown = document.querySelector("#sort");
-    // const orderToggle = document.querySelector("#order");
+    const sortDropDown = document.querySelector("#sort");
+    const orderToggle = "desc" || order;
     const topicDropDown = document.querySelector("#topics");
-    // const sortValue = sortDropDown.value;
-    // const orderValue = "desc";
+    const sortValue = sortDropDown.value;
+    const orderValue = orderToggle;
     const topicValue = topicDropDown.value;
 
     HandleFilter({
       topicValue,
-      // sortValue,
-      // orderValue,
+      sortValue,
+      orderValue,
       setArticles,
       setSearchParams,
     });

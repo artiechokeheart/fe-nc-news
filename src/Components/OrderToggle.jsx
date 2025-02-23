@@ -1,4 +1,20 @@
 export const OrderToggle = ({ articles, setArticles, setSearchParams }) => {
+  const handleChange = () => {
+    const sortDropDown = document.querySelector("#sort");
+    const orderToggle = document.querySelector("#order");
+    const topicDropDown = document.querySelector("#topics");
+    const sortValue = sortDropDown.value;
+    const orderValue = orderToggle.value;
+    const topicValue = topicDropDown.value;
+
+    HandleFilter({
+      topicValue,
+      sortValue,
+      orderValue,
+      setArticles,
+      setSearchParams,
+    });
+  };
   return (
     <>
       <input
@@ -7,9 +23,7 @@ export const OrderToggle = ({ articles, setArticles, setSearchParams }) => {
         value="desc"
         id="desc"
         defaultChecked="desc"
-        onChange={(e) => {
-          handleChange(e, { setArticles, setSearchParams });
-        }}
+        onChange={handleChange}
       />
       Descending
       <input
@@ -18,7 +32,7 @@ export const OrderToggle = ({ articles, setArticles, setSearchParams }) => {
         value="asc"
         id="asc"
         onChange={(e) => {
-          handleChange(e, { articles, setArticles, setSearchParams });
+          handleChange(e);
         }}
       />
       Ascending

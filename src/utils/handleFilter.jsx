@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchAllArticles, fetchAllTopics } from "../utils/api";
-import { createSearchParams, Link, useParams } from "react-router-dom";
+import { createSearchParams, useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
 export const HandleFilter = ({
@@ -19,24 +19,13 @@ export const HandleFilter = ({
 
   const newObject = {};
 
-  // console.log(topicValue, sortValue, orderValue, "<< handleFilter ");
+  console.log(topicValue, sortValue, orderValue, "<< handleFilter before ifs");
 
   if (topicValue) {
     newObject.topic = topicValue;
   }
 
-  // if (sortValue) {
-  //   if (sortValue === "comments") {
-  //     newObject.sort_by = "comment_count";
-  //   }
-
-  //   if (sortValue === "date") {
-  //     newObject.sort_by = "created_at";
-  //   }
-
-  //   newObject.sort_by = sortValue;
-  // }
-
+  newObject.sort_by = sortValue;
   // if (orderValue) {
   //   newObject.order = orderValue;
   // }
@@ -47,9 +36,10 @@ export const HandleFilter = ({
       setSearchParams(createSearchParams(newObject));
     });
   } else {
-    fetchAllArticles(topicValue).then((articlesFromApi) => {
+    fetchAllArticles(topicValue, sortValue).then((articlesFromApi) => {
       setArticles(articlesFromApi);
       setSearchParams(createSearchParams(newObject));
     });
   }
+  //setNewFilter("updated");
 };
