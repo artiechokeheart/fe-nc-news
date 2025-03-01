@@ -1,26 +1,31 @@
-import { useEffect, useState } from "react";
-import { fetchAllArticles, fetchAllTopics } from "../utils/api";
-import { createSearchParams, Link, useParams } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
-import { TopicsDropDown } from "./TopicsDropDown";
 import { HandleFilter } from "../utils/handleFilter";
-import { OrderToggle } from "./OrderToggle";
 
-export const SortArticlesDropDown = ({ setArticles, setSearchParams }) => {
+export const SortArticlesDropDown = ({
+  setArticles,
+  setSearchParams,
+  order,
+  setOrder,
+}) => {
   const handleChange = ({}) => {
     const sortDropDown = document.querySelector("#sort");
-    const orderToggle = "desc" || order;
     const topicDropDown = document.querySelector("#topics");
+    const orderDesc = document.querySelector("#desc");
     const sortValue = sortDropDown.value;
-    const orderValue = orderToggle;
     const topicValue = topicDropDown.value;
+    let orderValue = "";
+
+    if (orderDesc.checked) {
+      orderValue = "desc";
+    } else {
+      orderValue = "asc";
+    }
 
     HandleFilter({
       topicValue,
       sortValue,
-      orderValue,
       setArticles,
       setSearchParams,
+      orderValue,
     });
   };
 
@@ -35,13 +40,3 @@ export const SortArticlesDropDown = ({ setArticles, setSearchParams }) => {
     </>
   );
 };
-
-// export const handleChange = (e, { articles, setArticles, setSearchParams }) => {
-//   const sortDropDown = document.querySelector("#sort");
-//   const topicDropDown = document.querySelector("#topics");
-//   const sortValue = sortDropDown.value;
-//   const topicValue = topicDropDown.value;
-//   const orderValue = e.target.value;
-
-//   HandleFilter(topicValue, sortValue, orderValue, setArticles, setSearchParams);
-// };

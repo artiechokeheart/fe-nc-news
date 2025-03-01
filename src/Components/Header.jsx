@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 export const Header = () => {
   return (
     <>
-      <h1 className="text-5xl font-extrabold dark:text-white flex items-center justify-center">
-        NC News
-      </h1>
+      <img src="src/assets/NC NEWS.gif" />
       <Navbar />
     </>
   );
@@ -13,8 +11,8 @@ export const Header = () => {
 
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-center m-2 p-4">
-      <Link to="/" className="m-2">
+    <nav className="NavBar">
+      <Link to="/" className="Link">
         Home
       </Link>
     </nav>

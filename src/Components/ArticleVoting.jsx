@@ -6,11 +6,19 @@ export const ArticleVoting = () => {
   const { article_id } = useParams();
   const [currentVotes, setVotes] = useState(0);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchArticleVotes(article_id).then((response) => {
-      setVotes(response);
-    });
+    fetchArticleVotes(article_id)
+      .then((response) => {
+        setVotes(response);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   const increaseVote = () => {
@@ -21,6 +29,10 @@ export const ArticleVoting = () => {
       setError("Your vote was not successful. Please try again!");
     });
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   const decreaseVote = () => {
     setVotes((currentVotes) => currentVotes - 1);
@@ -36,19 +48,11 @@ export const ArticleVoting = () => {
       <h3>Votes</h3>
       <div>{currentVotes}</div>
 
-      <button
-        type="button"
-        className="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500 w-4 h-4 justify-center items-center"
-        onClick={increaseVote}
-      >
+      <button type="button" className="OldButton" onClick={increaseVote}>
         +
       </button>
       {error ? <p>{error}</p> : null}
-      <button
-        type="button"
-        className="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500 w-4 h-4 justify-center items-center"
-        onClick={decreaseVote}
-      >
+      <button type="button" className="OldButton" onClick={decreaseVote}>
         -
       </button>
     </>

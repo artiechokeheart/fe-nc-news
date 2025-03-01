@@ -1,18 +1,33 @@
-export const OrderToggle = ({ articles, setArticles, setSearchParams }) => {
-  const handleChange = () => {
+import { useEffect, useState } from "react";
+import { HandleFilter } from "../utils/handleFilter";
+
+export const OrderToggle = ({
+  articles,
+  setArticles,
+  setSearchParams,
+  setOrder,
+  order,
+}) => {
+  const handleChange = ({}) => {
     const sortDropDown = document.querySelector("#sort");
-    const orderToggle = document.querySelector("#order");
     const topicDropDown = document.querySelector("#topics");
+    const orderDesc = document.querySelector("#desc");
     const sortValue = sortDropDown.value;
-    const orderValue = orderToggle.value;
     const topicValue = topicDropDown.value;
+    let orderValue = "";
+
+    if (orderDesc.checked) {
+      orderValue = "desc";
+    } else {
+      orderValue = "asc";
+    }
 
     HandleFilter({
       topicValue,
       sortValue,
-      orderValue,
       setArticles,
       setSearchParams,
+      orderValue,
     });
   };
   return (
@@ -31,9 +46,7 @@ export const OrderToggle = ({ articles, setArticles, setSearchParams }) => {
         name="orderRadio"
         value="asc"
         id="asc"
-        onChange={(e) => {
-          handleChange(e);
-        }}
+        onChange={handleChange}
       />
       Ascending
     </>

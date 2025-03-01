@@ -2,8 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { HomePage } from "../Pages/HomePage";
 import { ArticlePage } from "../Pages/ArticlePage";
 import { useState } from "react";
-import { useEffect } from "react";
-import { fetchAllArticles } from "../utils/api";
+import { ErrorPage } from "../Pages/ErrorPage";
 
 export const ArticleContainer = () => {
   const [articles, setArticles] = useState([]);
@@ -18,6 +17,7 @@ export const ArticleContainer = () => {
         path="/articles/:article_id"
         element={<ArticlePage articles={articles} setArticles={setArticles} />}
       />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 };

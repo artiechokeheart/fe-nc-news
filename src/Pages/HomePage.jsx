@@ -1,31 +1,42 @@
 import { Articles } from "../Components/Articles";
-import { SortArticlesDropDown } from "../Components/SortArticlesDropDown";
-import { TopicsDropDown } from "../Components/TopicsDropDown";
 import { FilterContainer } from "../Containers/FilterContainer";
 import { useEffect, useState } from "react";
 import { fetchAllArticles } from "../utils/api";
-import { useSearchParams } from "react-router-dom";
+import { ErrorComponent } from "../Components/ErrorComponent";
 
 export const HomePage = ({ articles, setArticles }) => {
-  const [currentFilter, setNewFilter] = useState("");
-  // const [searchParams, setSearchParams] = useSearchParams();
-
-  //  console.log(searchParams, "searchParams in homepage");
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchAllArticles().then((articlesFromApi) => {
-      setArticles(articlesFromApi);
-    });
+    fetchAllArticles()
+      .then((articlesFromApi) => {
+        setArticles(articlesFromApi);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
+  if (error) {
+    return <ErrorComponent message={error.message} />;
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <>
-      <FilterContainer
+    <fragment>
+      <FilterContainer articles={articles} setArticles={setArticles} />
+      <Articles
         articles={articles}
         setArticles={setArticles}
-        setNewFilter={setNewFilter}
+        className="ArticleGridContainer"
       />
-      <Articles articles={articles} setArticles={setArticles} />
-    </>
+    </fragment>
   );
 };

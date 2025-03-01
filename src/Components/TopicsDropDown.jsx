@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAllArticles, fetchAllTopics } from "../utils/api";
-import { createSearchParams, Link, useParams } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
+import { fetchAllTopics } from "../utils/api";
 import { HandleFilter } from "../utils/handleFilter";
 
 export const TopicsDropDown = ({
@@ -9,62 +7,63 @@ export const TopicsDropDown = ({
   topics,
   setTopics,
   setSearchParams,
-  setNewFilter,
 }) => {
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    fetchAllTopics().then((TopicsFromApi) => {
-      setTopics(TopicsFromApi);
-    });
+    fetchAllTopics()
+      .then((TopicsFromApi) => {
+        setTopics(TopicsFromApi);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
+
+  if (error) {
+    return <ErrorComponent message={error.message} />;
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   const handleChange = ({}) => {
     const sortDropDown = document.querySelector("#sort");
-    const orderToggle = "desc" || order;
     const topicDropDown = document.querySelector("#topics");
+    const orderDesc = document.querySelector("#desc");
     const sortValue = sortDropDown.value;
-    const orderValue = orderToggle;
     const topicValue = topicDropDown.value;
+    let orderValue = "";
+
+    if (orderDesc.checked) {
+      orderValue = "desc";
+    } else {
+      orderValue = "asc";
+    }
 
     HandleFilter({
       topicValue,
       sortValue,
-      orderValue,
       setArticles,
       setSearchParams,
+      orderValue,
     });
   };
 
   return (
     <>
-      <label className="p-2">Select Topic:</label>
+      <label className="m-4">Select Topic:</label>
       <select name="topics" id="topics" onChange={handleChange}>
-        <option className="text-zinc-800">All</option>
+        <option>All</option>
         {topics.map((topic) => {
-          return (
-            <option className="text-zinc-900" value={topic.slug}>
-              {topic.slug}
-            </option>
-          );
+          return <option value={topic.slug}>{topic.slug}</option>;
         })}
       </select>
     </>
   );
 };
-//key={topic.topic_id} id={topic.artilce_id} topic={topic}
-
-// const handleChange = () => {
-//   const sortDropDown = document.querySelector("#sort");
-//   // const orderToggle = document.querySelector("#order");
-//   const topicDropDown = document.querySelector("#topics");
-//   const sortValue = sortDropDown.value;
-//   const orderValue = "desc";
-//   const topicValue = topicDropDown.value;
-
-//   HandleFilter(
-//     topicValue,
-//     sortValue,
-//     orderValue,
-//     setArticles,
-//     setSearchParams
-//   );
-//};
