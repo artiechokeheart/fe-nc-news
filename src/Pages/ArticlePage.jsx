@@ -33,18 +33,21 @@ export const ArticlePage = () => {
   }
 
   return (
-    <article className="Article">
-      <h2 className="">{article.title}</h2>
-      <div className="">
-        <img className="" src={article.article_img_url} />
-        <p className="">{article.body}</p>
+    <article className="SingleArticle">
+      <h2 className="SingleArticleTitle">{article.title}</h2>
+      <div className="SingleArticleTopic">Topic: {article.topic}</div>
+      <div className="SingleArticleBody">
+        <img
+          className="h-auto max-w-lg rounded p-2"
+          src={article.article_img_url}
+        />
+        <p className="p-2">{article.body}</p>
       </div>
-      <div className="">
-        Topic: {article.topic}
+      <div className="SingleArticleVotes">
         {<ArticleVoting article={article} />}
       </div>
       <br />
-      <div className="">
+      <div className="SingleArtileComments">
         <br />
         <h3 className="">Comments</h3>
         <Comments article_id={article_id} />

@@ -73,13 +73,15 @@ export const Comments = ({ article_id }) => {
 
   const articleComments = comments.map((comment) => {
     return (
-      <li key={comment.comment_id}>
-        <p className="leading-5">{comment.body}</p>
-        <button className="OldButton">{comment.votes} votes</button>
-        <DeleteComment comment={comment} />
-        {comment.author}
-
-        <hr />
+      <li key={comment.comment_id} className="Comments">
+        <div className="CommentBody">{comment.body}</div>
+        <div className="CommentVotes">
+          <p>{comment.votes} votes</p>
+        </div>
+        <div className="DeleteComment">
+          <DeleteComment comment={comment} />
+        </div>
+        <div className="CommentAuthor">{comment.author}</div>
       </li>
     );
   });
@@ -88,9 +90,9 @@ export const Comments = ({ article_id }) => {
       {error ? (
         <ErrorComponent message={error.message} />
       ) : (
-        <form action={postComment}>
+        <form action={postComment} className="PostComment">
           <textarea
-            className=" p-10"
+            className=""
             name="comment_box"
             placeholder="Comment here...."
             type="text"

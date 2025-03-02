@@ -31,11 +31,11 @@ export const SortArticlesDropDown = ({
 
   return (
     <>
-      <label className="p-2">Sort_by:</label>
+      <label className="p-5">Sort_by:</label>
       <select name="sort" id="sort" onChange={handleChange}>
-        <option>created_at</option>
-        <option>comment_count</option>
-        <option>votes</option>
+        <option className="text-black">created_at</option>
+        <option className="text-black">comment_count</option>
+        <option className="text-black">votes</option>
       </select>
     </>
   );

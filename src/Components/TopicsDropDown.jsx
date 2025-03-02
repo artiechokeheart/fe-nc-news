@@ -59,9 +59,13 @@ export const TopicsDropDown = ({
     <>
       <label className="m-4">Select Topic:</label>
       <select name="topics" id="topics" onChange={handleChange}>
-        <option>All</option>
+        <option className="text-black">All</option>
         {topics.map((topic) => {
-          return <option value={topic.slug}>{topic.slug}</option>;
+          return (
+            <option className="text-black" value={topic.slug}>
+              {topic.slug}
+            </option>
+          );
         })}
       </select>
     </>
