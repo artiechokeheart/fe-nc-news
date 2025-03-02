@@ -4,14 +4,14 @@ const newsApi = axios.create({
   baseURL: "https://artemis-be-news.onrender.com/api",
 });
 
-export const fetchAllArticles = (topic) => {
+export const fetchAllArticles = (topic, sort_by, order) => {
   return newsApi
-    .get("/articles/", { params: { topic } })
+    .get("/articles", { params: { topic, sort_by, order } })
     .then(({ data }) => {
       return data;
     })
     .catch((error) => {
-      console.log(error, "fetchAllArticles");
+      return Promise.reject(error);
     });
 };
 
@@ -22,7 +22,8 @@ export const fetchArticlesByArticleId = (article_id) => {
       return data;
     })
     .catch((error) => {
-      console.log(error, "fetchArticlesByArticleID");
+      console.log(error);
+      return Promise.reject(error);
     });
 };
 
@@ -33,7 +34,7 @@ export const fetchArticleVotes = (article_id) => {
       return data.votes;
     })
     .catch((error) => {
-      console.log(error, "fetchArticleVotes");
+      return Promise.reject(error);
     });
 };
 
@@ -44,7 +45,7 @@ export const patchArticle = (article_id, votes) => {
       return data;
     })
     .catch((error) => {
-      console.log(error, "patchArticle");
+      return Promise.reject(error);
     });
 };
 
@@ -55,31 +56,35 @@ export const fetchArticleComments = (article_id) => {
       return data;
     })
     .catch((error) => {
-      console.log(error, "fetchArticleComments");
+      return Promise.reject(error);
     });
 };
 
 export const postArticleComments = (article_id, newComment, username) => {
   const commentToPost = { username: username, body: newComment };
+  if (newComment === "") {
+    return Promise.reject({
+      message: "Your comment is empty, please try again...",
+    });
+  }
   return newsApi
     .post(`/articles/${article_id}/comments`, commentToPost)
     .then(({ data }) => {
       return data;
     })
     .catch((error) => {
-      console.log(error, "postArticleComments");
+      return Promise.reject(error);
     });
 };
 
 export const DeleteArticleComments = (comment_id) => {
-  console.log(comment_id);
   return newsApi
     .delete(`/comments/${comment_id}`)
     .then((response) => {
       console.log(response, `Deleted post with ID ${comment_id}`);
     })
     .catch((error) => {
-      console.log(error, `Could not delete post with ID ${comment_id}`);
+      return Promise.reject(error);
     });
 };
 
@@ -90,6 +95,6 @@ export const fetchAllTopics = () => {
       return data;
     })
     .catch((error) => {
-      console.log(error, "fetchAllTopics");
+      return Promise.reject(error);
     });
 };

@@ -3,129 +3,174 @@
 #root {
   margin: 0 auto;
   padding: 2rem;
+  font-family: Times New Roman, Helvetica, Comic-sans;
+  font-palette: rgb(98, 98, 98);
+  background-color: #0e103d;
 }
 
-/* .home_page_articles > li {
-  width: 50rem;
-  height: 15rem;
-  border: hotpink 1px solid;
-}
-
-.home_page_articles > li > h3 {
-  border: hotpink 1px solid;
-  align-items: start;
-  text-align: left;
-}
-
-.home_page_articles > li > div {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  border: 1px solid black;
-  width: 50%; */
-
-/* From Uiverse.io by andrew-demchenk0 */
-.wrapper {
-  --input-focus: #2d8cf0;
-  --font-color: #323232;
-  --font-color-sub: #666;
-  --bg-color: #fff;
-  --bg-color-alt: #666;
-  --main-color: #323232;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-}
-/* switch card */
-
-.card-side::before {
-  position: absolute;
-  left: -70px;
-  top: 0;
-  width: 100px;
-  text-decoration: underline;
-  color: var(--font-color);
-  font-weight: 600;
-}
-
-/* card */
-
-.flip-card__inner {
-  width: 300px;
-  height: 350px;
-  background-color: transparent;
-  /* width: 100%;
-    height: 100%; */
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.flip-card__front,
-.flip-card__back {
-  padding: 20px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  background: lightgrey;
-  gap: 20px;
-  border-radius: 5px;
-  border: 2px solid var(--main-color);
-  box-shadow: 4px 4px var(--main-color);
-}
-
-.flip-card__form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0px;
-}
-
-.title {
-  margin: 20px 0 20px 0;
-  font-size: 25px;
-  font-weight: 900;
-  text-align: center;
-  color: var(--main-color);
-}
-
-.flip-card__input {
-  width: 250px;
-  height: 150px;
-  border-radius: 5px;
-  border: 2px solid var(--main-color);
-  background-color: var(--bg-color);
-  box-shadow: 4px 4px var(--main-color);
+.OldButton {
   font-size: 15px;
-  font-weight: 600;
-  color: var(--font-color);
-  padding: 5px 10px;
+  padding: 7px 20px;
+  background: grey;
+  border: 2px outset;
   outline: none;
-}
-
-.flip-card__input::placeholder {
-  color: var(--font-color-sub);
-  opacity: 0.8;
-}
-
-.flip-card__input:focus {
-  border: 2px solid var(--input-focus);
-}
-
-.flip-card__btn:active,
-.button-confirm:active {
-  box-shadow: 0px 0px var(--main-color);
-  transform: translate(3px, 3px);
-}
-
-.flip-card__btn {
-  margin: 20px 0 20px 0;
-  width: 120px;
-  height: 40px;
-  border-radius: 5px;
-  border: 2px solid var(--main-color);
-  background-color: var(--bg-color);
-  box-shadow: 4px 4px var(--main-color);
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--font-color);
   cursor: pointer;
+
+  &:active {
+    border: 2px inset;
+  }
+}
+
+#grad {
+  background-image: linear-gradient(red, yellow, green);
+}
+
+.NavBar {
+  padding-top: 0.25%;
+  padding-bottom: 0.5%;
+  color: #ebebeb;
+  background-color: #08111b;
+}
+
+.ArticleGridContainer {
+  display: grid;
+  grid-template-columns: 1fr 25fr 1fr 1fr;
+  gap: 2px;
+  padding: 10px;
+}
+
+.ArticleGridContainer > .Title {
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(#08111b, #3a405a, #adbdff, #3a405a, #08111b);
+  color: #08111b;
+}
+.GridItem {
+  background-color: #08111b;
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  align-content: center;
+}
+
+.Link {
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.Link:hover {
+  color: grey;
+}
+
+.NavBar > .Link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 16px;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.Filter > {
+  padding: 5%;
+}
+
+.SingleArticle {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto;
+}
+
+.SingleArticleTitle {
+  background-color: #08111b;
+  grid-column-start: 1;
+  grid-column: span 4;
+  font-size: x-large;
+  font-weight: bolder;
+  margin: 4px;
+}
+
+.SingleArticleTopic {
+  grid-row-start: 2;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.SingleArticleBody {
+  grid-row-start: 3;
+  grid-row-end: 4;
+  font-size: large;
+  justify-content: center;
+}
+
+.SingleArticleVotes {
+  grid-row-start: 5;
+  grid-row-end: 5;
+}
+
+.SingleArtileComments {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-row-start: 6;
+}
+
+.Comments {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  background-color: #08111b;
+  padding-bottom: 1rem;
+  outline: solid;
+  outline-color: #0e103d;
+  padding-top: 2.5px;
+}
+
+.CommentInfo {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 20px 100px 100px;
+  padding-top: 2px;
+}
+
+.CommentAuthor {
+  grid-column-start: 1;
+  grid-row-start: 3;
+  column-width: 6.5rem;
+  padding-left: 10px;
+}
+.CommentBody {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  align-self: top;
+  justify-self: start;
+  column-width: 55rem;
+}
+
+.CommentVotes {
+  grid-column-start: 2;
+  grid-row-start: 3;
+  padding-left: 10px;
+  padding-right: 5px;
+  align-self: top;
+  justify-self: start;
+}
+
+.PostComment {
+  background-color: grey;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto 100px;
+}
+.DeleteComment {
+  grid-column-start: 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  padding-left: 5px;
+  padding-right: 5px;
+  align-self: top;
+  justify-self: end;
 }

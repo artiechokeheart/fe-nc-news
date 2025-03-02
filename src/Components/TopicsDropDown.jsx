@@ -1,44 +1,68 @@
 import { useEffect, useState } from "react";
-import { fetchAllArticles, fetchAllTopics } from "../utils/api";
-import { createSearchParams, Link, useParams } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
+import { fetchAllTopics } from "../utils/api";
+import { HandleFilter } from "../utils/handleFilter";
 
-export const TopicsDropDown = ({ articles, setArticles }) => {
-  const { topic } = useParams();
-  const [topics, setTopics] = useState([]);
-  let [searchParams, setSearchParams] = useSearchParams();
+export const TopicsDropDown = ({
+  setArticles,
+  topics,
+  setTopics,
+  setSearchParams,
+}) => {
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchAllTopics().then((TopicsFromApi) => {
-      setTopics(TopicsFromApi);
-    });
+    fetchAllTopics()
+      .then((TopicsFromApi) => {
+        setTopics(TopicsFromApi);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
-  const handleChange = (event) => {
-    const topic = event.target.value;
-    if (topic === "All") {
-      fetchAllArticles().then((articlesFromApi) => {
-        setArticles(articlesFromApi);
-        setSearchParams(createSearchParams({}));
-      });
+  if (error) {
+    return <ErrorComponent message={error.message} />;
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  const handleChange = ({}) => {
+    const sortDropDown = document.querySelector("#sort");
+    const topicDropDown = document.querySelector("#topics");
+    const orderDesc = document.querySelector("#desc");
+    const sortValue = sortDropDown.value;
+    const topicValue = topicDropDown.value;
+    let orderValue = "";
+
+    if (orderDesc.checked) {
+      orderValue = "desc";
     } else {
-      fetchAllArticles(topic).then((fetchedTopic) => {
-        setArticles((articles) => {
-          return fetchedTopic;
-        });
-        setSearchParams(createSearchParams({ topic: [topic] }));
-      });
+      orderValue = "asc";
     }
+
+    HandleFilter({
+      topicValue,
+      sortValue,
+      setArticles,
+      setSearchParams,
+      orderValue,
+    });
   };
 
   return (
     <>
-      <label className="p-2">Select Topic:</label>
+      <label className="m-4">Select Topic:</label>
       <select name="topics" id="topics" onChange={handleChange}>
-        <option className="text-zinc-800">All</option>
+        <option className="text-black">All</option>
         {topics.map((topic) => {
           return (
-            <option className="text-zinc-900" value={topic.slug}>
+            <option className="text-black" value={topic.slug}>
               {topic.slug}
             </option>
           );
@@ -47,4 +71,3 @@ export const TopicsDropDown = ({ articles, setArticles }) => {
     </>
   );
 };
-//key={topic.topic_id} id={topic.artilce_id} topic={topic}
