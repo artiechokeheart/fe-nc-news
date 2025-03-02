@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const Header = () => {
   return (
     <>
-      <img src="src/assets/NC NEWS.gif" />
+      <img src="src/assets/NCNEWS.gif" />
       <Navbar />
     </>
   );

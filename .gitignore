@@ -26,3 +26,5 @@ dist-ssr
 #Project Notes 
 endpoints.json
 Planning.md
+# Local Netlify folder
+.netlify
